@@ -35,7 +35,7 @@ $('.list-user').on('click', 'li', function () {
 });
 
 function openStream() {
-    const config = { audio: false, video: true };
+    const config = { audio: true, video: true };
     
     return navigator.mediaDevices.getUserMedia(config);
 }
