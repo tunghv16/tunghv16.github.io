@@ -1,28 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <title>TungHV webRTC</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/peerjs@0.3.20/dist/peer.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 </head>
 <body>
-<div id="div-chat">
-    <h3 id="my-peer">My id: </h3>
-    <h2>Danh sach cac user sang online</h2>
-    <ul class="list-user"></ul>
-    <video id="localStream" width="350px" controls></video>
-    <br><br>
-    <video id="remoteStream" width="350px" controls></video>
-    <br><br>
-    <input type="text" id="remote-id" placeholder="Remote id">
-    <button id="btn-call">Call</button>
-</div>
-<div id="div-register">
-    <br><br>
-    <input type="text" id="txtUserName" placeholder="Enter your name">
-    <button id="btnSignUp">SignUp</button>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div id="div-chat">
+                <h3 id="my-peer">ID của bạn: </h3>
+                <h2>Danh sách những user đang online</h2>
+                <ul class="list-user"></ul>
+                <video id="localStream" width="350px" controls></video>
+                <br><br>
+                <video id="remoteStream" width="350px" controls></video>
+                <br><br>
+                <input type="text" id="remote-id" placeholder="ID của người bạn">
+                <button id="btn-call">Gọi</button>
+            </div>
+        </div>
+        <div class="col-12 mt-5 text-center">
+            <div id="div-register" class="form-inline">
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="txtUserName" class="sr-only">Password</label>
+                    <input type="text" class="form-control" id="txtUserName" placeholder="Enter your name">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2" id="btnSignUp">Đăng ký tài khoản</button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 <script src="main.js"></script>
