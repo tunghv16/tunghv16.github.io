@@ -7,12 +7,24 @@ socket.on('listOnline', function (data) {
     
     data.forEach(function (user) {
         const {ten, peerId} = user;
-        $('.list-user').append(`<li id="${ peerId }">${ ten }</li>`);
+        $('.list-user').append(
+            `<li class="mb-2" id="${ peerId }">${ ten }
+            <button class="btn btn-danger">
+            <i class="fa fa-phone text-success"></i>
+            </button>
+            </li>`
+        );
     });
     
     socket.on('newUserLogin', function (u) {
         const {ten, peerId} = u;
-        $('.list-user').append(`<li id="${ peerId }">${ ten }</li>`);
+        $('.list-user').append(
+            `<li class="mb-2" id="${ peerId }">${ ten }
+            <button class="btn btn-danger">
+            <i class="fa fa-phone text-success"></i>
+            </button>
+            </li>`
+        );
     });
     
     socket.on('userDisconnect', function (peerId) {
@@ -24,8 +36,14 @@ socket.on('failed', function () {
     alert('Tên này đã được sử dụng. Vui lòng đăng ký tên khác!!!');
 });
 
+socket.on('disabledCallUser', function (data) {
+    $(`#${ data.caller }`).find('button').hide();
+    $(`#${ data.callee }`).find('button').hide();
+});
+
 $('.list-user').on('click', 'li', function () {
     let peerId = $(this).attr('id');
+    socket.emit('userCall', peerId);
     openStream().then(function (strem) {
         playStream('localStream', strem);
         const call = peer.call(peerId, strem);
@@ -44,7 +62,20 @@ function openStream() {
 function playStream(idVideoTag, stream) {
     const video     = document.getElementById(idVideoTag);
     video.srcObject = stream;
-    video.play();
+    let playPromise = video.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            // Automatic playback started!
+            // Show playing UI.
+            // We can now safely pause video...
+            video.reload();
+        })
+            .catch(error => {
+                // Auto-play was prevented
+                // Show paused UI.
+            });
+    }
 }
 
 // openStream().then(stream => playStream('localStream', stream));
@@ -58,6 +89,13 @@ peer.on('open', function (id) {
         let userName = $('#txtUserName').val();
         
         socket.emit('register', {ten : userName, peerId : id});
+    });
+    
+    $('.close-call').on('click',function () {
+        console.log('xxxx');
+        peer.on('close', function() {
+            peer.destroy();
+        });
     });
 });
 

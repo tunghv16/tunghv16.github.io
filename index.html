@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8"/>
+    <meta charset="utf-8"/>
     <title>TungHV webRTC</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="jquery-3.4.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -12,27 +19,52 @@
 </head>
 <body>
 <div class="container">
-    <div class="row">
-        <div class="col-12">
+    <div class="row row justify-content-md-center">
+        <div class="col-12 mt-5">
             <div id="div-chat">
-                <h3 id="my-peer">ID của bạn: </h3>
-                <h2>Danh sách những user đang online</h2>
+                <h3 id="my-peer">My ID: </h3>
+                <h2>List user online</h2>
                 <ul class="list-user"></ul>
-                <video id="localStream" width="350px" controls></video>
-                <br><br>
-                <video id="remoteStream" width="350px" controls></video>
-                <br><br>
-                <input type="text" id="remote-id" placeholder="ID của người bạn">
-                <button id="btn-call">Gọi</button>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <div style="position: relative;">
+                            <video id="localStream" class="w-100" controls></video>
+                            <div class="close-call" style="position: absolute;
+    right: 20px;
+    bottom: 75px;
+    border-radius: 50%;
+    background: red;
+    width: 50px;
+    height: 50px;">
+                                <i style="margin-left: 16px;
+    margin-top: 13px;
+    font-size: 27px;
+    color: white !important;" class="fa fa-phone text-danger"></i>
+                            </div>
+                        </div>
+                        <br><br>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <video id="remoteStream" class="w-100" controls></video>
+                        <br><br>
+                    </div>
+                </div>
+
+                <div id="div-call-id" class="form-inline col-12 col-md-6">
+                    <div class="form-group">
+                        <input class="form-control" type="text" id="remote-id" placeholder="ID of friend">
+                    </div>
+                    <button class="btn btn-success ml-2" id="btn-call">Call</button>
+                </div>
             </div>
         </div>
-        <div class="col-12 mt-5 text-center">
-            <div id="div-register" class="form-inline">
-                <div class="form-group mx-sm-3 mb-2">
+        <div class="col-12 mt-5 text-center col-md-auto">
+            <div id="div-register" class="">
+                <div class="form-group mx-sm-3 mb-2 col-12">
                     <label for="txtUserName" class="sr-only">Password</label>
                     <input type="text" class="form-control" id="txtUserName" placeholder="Enter your name">
                 </div>
-                <button type="submit" class="btn btn-primary mb-2" id="btnSignUp">Đăng ký tài khoản</button>
+                <button type="submit" class="btn btn-primary mb-2" id="btnSignUp">Register</button>
             </div>
         </div>
     </div>
